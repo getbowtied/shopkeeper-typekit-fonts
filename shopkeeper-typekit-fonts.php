@@ -36,7 +36,7 @@ if (!class_exists('ShopkeeperTypekitFonts')) {
                     'priority'    => 10,
                 ));
 
-                Kirki::add_field( '', array(
+                Kirki::add_field( 'shopkeeper', array(
                     'type'          => 'text',
                     'settings'      => 'addon_font_typekit_kit_id',
                     'label'         => esc_attr__( 'Typekit Kit ID', 'getbowtied' ),
@@ -52,7 +52,7 @@ if (!class_exists('ShopkeeperTypekitFonts')) {
                     ),
                 ));
 
-                Kirki::add_field( '', array(
+                Kirki::add_field( 'shopkeeper', array(
                     'type'          => 'text',
                     'settings'      => 'addon_main_typekit_font_face',
                     'label'         => esc_attr__( 'Main Typekit Font Face', 'getbowtied' ),
@@ -68,7 +68,7 @@ if (!class_exists('ShopkeeperTypekitFonts')) {
                     ),
                 ));
 
-                Kirki::add_field( '', array(
+                Kirki::add_field( 'shopkeeper', array(
                     'type'          => 'text',
                     'settings'      => 'addon_secondary_typekit_font_face',
                     'label'         => esc_attr__( 'Secondary Typekit Font Face', 'getbowtied' ),
