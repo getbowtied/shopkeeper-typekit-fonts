@@ -5,7 +5,7 @@ Plugin URI: http://www.getbowtied.com/
 Description: A simple extension that allows you to use Typekit Fonts with your Shopkeeper theme.
 Author: GetBowtied
 Author URI: http://www.getbowtied.com
-Version: 1.2
+Version: 1.3
 Text Domain: getbowtied
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
