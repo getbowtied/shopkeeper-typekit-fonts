@@ -1,0 +1,18 @@
+{
+	"name": "Shopkeeper Typekit Fonts",
+	"version": "1.3",
+	"download_url": "https://github.com/getbowtied/shopkeeper-typekit-fonts/zipball/master",
+
+	"homepage": "https://themeforest.net/item/shopkeeper-ecommerce-wp-theme-for-woocommerce/9553045",
+	"requires": "5.0",
+	"tested": "5.3",
+	"last_updated": "2019-11-14 15:00:00",
+
+	"author": "GetBowtied",
+	"author_homepage": "https://getbowtied.com/",
+
+	"sections": {
+		"description": "<p>A simple extension that allows you to use Typekit Fonts with your Shopkeeper theme.</p>",
+		"changelog": "<h4>1.3</h4><ul><li>Small maintenance updates</li></ul><h4>1.2</h4><ul><li>Small maintenance updates</li></ul><h4>1.1</h4><ul><li>Small maintenance updates</li></ul><h4>1.0</h4><ul><li>Initial Version</li></ul>"
+	},
+}
