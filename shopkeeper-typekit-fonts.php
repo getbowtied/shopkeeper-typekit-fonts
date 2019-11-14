@@ -20,8 +20,12 @@
      exit;
  } // Exit if accessed directly
 
- if( ! function_exists( 'get_plugin_data' ) ) {
+if( ! function_exists( 'get_plugin_data' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+
+if( ! function_exists( 'get_current_screen' ) ) {
+    require_once(ABSPATH . 'wp-admin/includes/screen.php');
 }
 
  // Plugin Updater
@@ -70,7 +74,7 @@ if ( !class_exists( 'ShopkeeperTypekitFonts' ) ) {
 			}
 
             add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_sk_typekit_scripts' ), 99 );
-            add_action( 'wp_head', array( $this, 'enqueue_sk_typekit_styles' ), 100);
+            add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_sk_typekit_scripts' ), 99 );
         }
 
 		/**
@@ -94,29 +98,72 @@ if ( !class_exists( 'ShopkeeperTypekitFonts' ) ) {
 
         public function enqueue_sk_typekit_scripts() {
 			if( get_option( 'enable_typekit_fonts', false ) && !empty( get_option( 'addon_font_typekit_kit_id', '' ) ) ) {
-                 wp_enqueue_script(
-					 'shopkeeper-adobe_typekit',
-					 '//use.typekit.net/'.$typekitID.'.js',
-					 array(),
-					 $this->version,
-					 FALSE
-				 );
+                wp_enqueue_script(
+					'shopkeeper-adobe_typekit',
+					'//use.typekit.net/'.get_option( 'addon_font_typekit_kit_id', '' ).'.js',
+					array(),
+					$this->version,
+					FALSE
+				);
 
-                 wp_enqueue_script(
-					 'shopkeeper-adobe_typekit_exec',
-					 dirname( __FILE__ ) . 'assets/js/typekit.js',
-					 array(),
-					 $this->version,
-					 FALSE
-				 );
+                wp_enqueue_script(
+					'shopkeeper-adobe_typekit_exec',
+                    plugins_url( '/assets/js/typekit.js', __FILE__ ),
+					array(),
+					$this->version,
+					FALSE
+				);
+
+                // Frontend styles.
+                wp_enqueue_style(
+                    'shopkeeper-adobe_typekit',
+                    plugins_url( '/assets/css/typekit.css', __FILE__ ),
+                    array( 'shopkeeper-styles' ),
+                    $this->version
+                );
+
+                // Frontend custom styles.
+                $custom_styles = '';
+                include( dirname( __FILE__ ) . '/includes/custom-styles/frontend/fonts.css.php' );
+             	wp_add_inline_style( 'shopkeeper-adobe_typekit', $custom_styles );
             }
         }
 
-        public function enqueue_sk_typekit_styles() {
-            if( get_option( 'enable_typekit_fonts', false ) ) {
-				// enqueue styles
-				include_once( dirname( __FILE__ ) . '/includes/custom-styles/fonts.css.php' );
-			}
+        public function enqueue_admin_sk_typekit_scripts() {
+
+            if( get_option( 'enable_typekit_fonts', false ) && !empty( get_option( 'addon_font_typekit_kit_id', '' ) ) ) {
+                wp_enqueue_script(
+					'shopkeeper-adobe_typekit',
+					'//use.typekit.net/'.get_option( 'addon_font_typekit_kit_id', '' ).'.js',
+					array(),
+					$this->version,
+					FALSE
+				);
+
+                wp_enqueue_script(
+					'shopkeeper-adobe_typekit_exec',
+                    plugins_url( '/assets/js/typekit.js', __FILE__ ),
+					array(),
+					$this->version,
+					FALSE
+				);
+
+                // Backend styles.
+                wp_enqueue_style(
+                    'shopkeeper-admin_adobe_typekit',
+                    plugins_url( '/assets/css/admin/typekit.css', __FILE__ ),
+                    array( 'shopkeeper_admin_styles' ),
+                    $this->version
+                );
+
+                // Backend custom styles.
+                $custom_gutenberg_styles = '';
+                include( dirname( __FILE__ ) . '/includes/custom-styles/backend/fonts.css.php' );
+                $current_screen = get_current_screen();
+                if ( method_exists($current_screen, 'is_block_editor') && $current_screen->is_block_editor() ) {
+                    wp_add_inline_style( 'shopkeeper-admin_adobe_typekit', $custom_gutenberg_styles );
+                }
+            }
         }
 
 		/**

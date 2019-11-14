@@ -12,6 +12,19 @@ function sk_typekit_sanitize_checkbox( $value ) {
 }
 
 /**
+ * Converts bool to string
+ *
+ * @param bool $bool [the input].
+ *
+ * @return boolean
+ */
+function sk_typekit_sanitize_js_checkbox( $bool ) {
+	$bool = is_bool( $bool ) ? $bool : ( 'yes' === $bool || 1 === $bool || 'true' === $bool || '1' === $bool );
+
+	return true === $bool ? 'yes' : 'no';
+}
+
+/**
  * Checks if Adobe Typekit fonts is enabled.
  */
 function sk_typekit_is_adobe_font(){
@@ -33,6 +46,7 @@ function shopkeeper_typekit_fonts_controls( $wp_customize ) {
        array(
            'type'                 => 'option',
            'sanitize_callback'    => 'sk_typekit_sanitize_checkbox',
+           'sanitize_js_callback' => 'sk_typekit_sanitize_js_checkbox',
            'default'              => false,
        )
    );

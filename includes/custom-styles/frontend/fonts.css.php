@@ -1,7 +1,8 @@
 <?php
 
 if( !empty( get_option( 'addon_main_typekit_font_face', '' ) ) ) {
-    echo '<style>
+
+    $custom_styles .= '
         h1, h2, h3, h4, h5, h6,
         .comments-title,
         .comment-author,
@@ -273,13 +274,14 @@ if( !empty( get_option( 'addon_main_typekit_font_face', '' ) ) ) {
         .cd-quick-view .wcva_attribute_sep,
         .cd-quick-view .wcva_selected_attribute
         {
-            font-family: ' . get_option( 'addon_main_typekit_font_face', '' ) . '
+            font-family: ' . get_option( 'addon_main_typekit_font_face', '' ) . ', sans-serif;
         }
-    </style>';
+    ';
 }
 
 if( !empty( get_option( 'addon_secondary_typekit_font_face', '' ) ) ) {
-    echo '<style>
+
+    $custom_styles .= '
         body,
         p,
         #site-navigation-top-bar,
@@ -354,9 +356,9 @@ if( !empty( get_option( 'addon_secondary_typekit_font_face', '' ) ) ) {
         .product_content_wrapper .product_infos span.belowtext,
         .wc-block-grid__product-title
         {
-            font-family: ' . get_option( 'addon_secondary_typekit_font_face', '' ) . '
+            font-family: ' . get_option( 'addon_secondary_typekit_font_face', '' ) . ', serif;
         }
-    </style>';
+    ';
 }
 
 ?>
